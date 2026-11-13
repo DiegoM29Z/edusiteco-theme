@@ -349,3 +349,141 @@ header .search-form .search-field {
         animation: none !important;
     }
 }
+
+.circular-placeholder {
+    display: flex;
+    height: 13rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 1.5rem;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, .9), transparent 34%),
+        linear-gradient(135deg, #f1f7fb 0%, #e7f2f7 55%, #fff5e3 100%);
+    transition: filter .3s ease;
+}
+
+.group:hover .circular-placeholder {
+    filter: saturate(1.08);
+}
+
+.circular-placeholder__card {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 22rem;
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
+    padding: 1.15rem;
+    border: 1px solid rgba(255, 255, 255, .9);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .82);
+    box-shadow: 0 12px 28px rgba(27, 55, 75, .12);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.circular-placeholder__icon {
+    z-index: 1;
+    display: grid;
+    width: 3.5rem;
+    height: 3.5rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #d5e8f1;
+    border-radius: .9rem;
+    background: linear-gradient(145deg, #fff, #eaf5fa);
+    color: #17668d;
+}
+
+.circular-placeholder__icon svg {
+    width: 1.9rem;
+    height: 1.9rem;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.circular-placeholder__copy {
+    z-index: 1;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.circular-placeholder__eyebrow {
+    margin-bottom: .2rem;
+    color: #547487;
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.circular-placeholder__title {
+    color: #1d3445;
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.circular-placeholder__school {
+    overflow: hidden;
+    margin-top: .35rem;
+    color: #667987;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.circular-placeholder__accent {
+    position: absolute;
+    top: -1.7rem;
+    right: -1.7rem;
+    width: 5rem;
+    height: 5rem;
+    border: .65rem solid rgba(224, 177, 91, .2);
+    border-radius: 50%;
+}
+
+@media (max-width: 480px) {
+    .circular-placeholder {
+        padding: 1rem;
+    }
+
+    .circular-placeholder__card {
+        gap: .75rem;
+        padding: .9rem;
+    }
+}
+
+html.dark .circular-placeholder {
+    background:
+        radial-gradient(circle at 12% 18%, rgba(74, 105, 127, .35), transparent 34%),
+        linear-gradient(135deg, #1d2b37 0%, #253b49 58%, #423c32 100%);
+}
+
+html.dark .circular-placeholder__card {
+    border-color: rgba(148, 163, 184, .24);
+    background: rgba(15, 23, 42, .78);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .22);
+}
+
+html.dark .circular-placeholder__icon {
+    border-color: #3a5668;
+    background: linear-gradient(145deg, #334b5b, #263b4b);
+    color: #b6e0f3;
+}
+
+html.dark .circular-placeholder__eyebrow,
+html.dark .circular-placeholder__school {
+    color: #b1c5d1;
+}
+
+html.dark .circular-placeholder__title {
+    color: #f1f7fa;
+}
