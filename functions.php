@@ -253,7 +253,9 @@ function edusiteco_scripts() {
 	wp_enqueue_style( 'edusiteco-base', get_template_directory_uri() . '/assets/css/index.css', array(), $base_css_version );
 	wp_style_add_data( 'edusiteco-base', 'rtl', 'replace' );
 
-	wp_enqueue_style( 'edusiteco-nav-menu', get_template_directory_uri() . '/src/css/nav-menu.css', array( 'edusiteco-base' ), _S_VERSION );
+	$nav_css_path = get_template_directory() . '/src/css/nav-menu.css';
+	$nav_css_version = file_exists( $nav_css_path ) ? filemtime( $nav_css_path ) : _S_VERSION;
+	wp_enqueue_style( 'edusiteco-nav-menu', get_template_directory_uri() . '/src/css/nav-menu.css', array( 'edusiteco-base' ), $nav_css_version );
 
 	// RTL stylesheet for Tailwind
 	if ( is_rtl() ) {
