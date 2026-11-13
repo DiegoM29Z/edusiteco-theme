@@ -232,6 +232,88 @@ class Mobile_Nav_Walker extends Walker_Nav_Menu
     }
 }
 
+/**
+ * Add the news section to the primary menu when a custom menu omits it.
+ *
+ * @param string   $items Menu item markup.
+ * @param stdClass $args  Menu arguments.
+ * @return string
+ */
+function edusiteco_append_news_to_primary_menu($items, $args)
+{
+    if (!isset($args->theme_location) || 'menu-1' !== $args->theme_location || preg_match('/>\s*Noticias\s*</i', $items)) {
+        return $items;
+    }
+
+    $has_header_image = get_header_image() ? true : false;
+    $comunicados_url = get_post_type_archive_link('comunicado');
+    if (!$comunicados_url) {
+        $comunicados_url = home_url('/comunicados/');
+    }
+
+    $contratacion_page = get_page_by_path('portal-de-contratacion');
+    $contratacion_url = $contratacion_page
+        ? get_permalink($contratacion_page->ID)
+        : home_url('/portal-de-contratacion/');
+
+    $eventos_category = get_category_by_slug('eventos');
+    $eventos_url = $eventos_category
+        ? get_category_link($eventos_category->term_id)
+        : $comunicados_url;
+
+    $circulares_category = get_category_by_slug('circulares');
+    $circulares_url = $circulares_category
+        ? get_category_link($circulares_category->term_id)
+        : $comunicados_url;
+
+    if (isset($args->walker) && $args->walker instanceof Mobile_Nav_Walker) {
+        $mobile_link_classes = $has_header_image
+            ? 'text-white bg-white/15 hover:bg-white/25'
+            : 'text-text-light dark:text-text-dark bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700';
+        $mobile_toggle_classes = $has_header_image
+            ? 'text-white bg-white/15 hover:bg-white/25'
+            : 'text-text-light dark:text-text-dark bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700';
+        $mobile_submenu_classes = $has_header_image
+            ? 'text-white hover:bg-white/20'
+            : 'text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700';
+
+        $items .= '<li class="border-b border-border-light dark:border-border-dark last:border-b-0">';
+        $items .= '<div class="flex items-center">';
+        $items .= '<a href="' . esc_url($comunicados_url) . '" class="flex-1 pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_link_classes) . ' transition-all">Noticias</a>';
+        $items .= '<button type="button" class="mobile-toggle flex-shrink-0 px-4 py-3.5 ' . esc_attr($mobile_toggle_classes) . ' transition-all" aria-expanded="false" aria-controls="primary-mobile-news" aria-label="Mostrar secciones de Noticias">';
+        $items .= '<svg class="w-5 h-5 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+        $items .= '</button></div><div id="primary-mobile-news" class="hidden"><ul class="pl-6 space-y-0">';
+        $items .= '<li><a class="block pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_submenu_classes) . ' transition-all" href="' . esc_url($comunicados_url) . '">Comunicados</a></li>';
+        $items .= '<li><a class="block pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_submenu_classes) . ' transition-all" href="' . esc_url($contratacion_url) . '">Convocatorias</a></li>';
+        $items .= '<li><a class="block pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_submenu_classes) . ' transition-all" href="' . esc_url($circulares_url) . '">Circulares</a></li>';
+        $items .= '<li><a class="block pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_submenu_classes) . ' transition-all" href="' . esc_url($eventos_url) . '">Eventos</a></li>';
+        $items .= '</ul></div></li>';
+
+        return $items;
+    }
+
+    $desktop_text_classes = $has_header_image
+        ? 'text-white drop-shadow-md hover:text-brand-primary-200'
+        : 'text-text-light dark:text-text-dark hover:text-brand-primary dark:hover:text-brand-primary-300';
+    $desktop_icon_classes = $has_header_image
+        ? 'text-white drop-shadow-sm'
+        : 'text-text-light dark:text-text-dark';
+
+    $items .= '<li class="relative header-group group">';
+    $items .= '<a href="' . esc_url($comunicados_url) . '" class="' . esc_attr($desktop_text_classes) . ' text-lg font-bold transition-all duration-200 rounded-sm no-underline" aria-haspopup="true" aria-expanded="false">';
+    $items .= '<span class="underline-link">Noticias</span>';
+    $items .= '<svg class="w-5 h-5 ml-1 ' . esc_attr($desktop_icon_classes) . ' group-hover:rotate-180 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>';
+    $items .= '<ul class="submenu">';
+    $items .= '<li><a class="submenu-item" href="' . esc_url($comunicados_url) . '">Comunicados</a></li>';
+    $items .= '<li><a class="submenu-item" href="' . esc_url($contratacion_url) . '">Convocatorias</a></li>';
+    $items .= '<li><a class="submenu-item" href="' . esc_url($circulares_url) . '">Circulares</a></li>';
+    $items .= '<li><a class="submenu-item" href="' . esc_url($eventos_url) . '">Eventos</a></li>';
+    $items .= '</ul></li>';
+
+    return $items;
+}
+add_filter('wp_nav_menu_items', 'edusiteco_append_news_to_primary_menu', 10, 2);
+
 
 // ========== FALLBACK FUNCTIONS ==========
 
@@ -391,6 +473,17 @@ function edusiteco_default_mobile_menu()
     $psico_page = get_page_by_path('psicoorientacion-escolar');
     $psico_url = $psico_page ? get_permalink($psico_page->ID) : '#';
 
+    $comunicados_url = get_post_type_archive_link('comunicado');
+    if (!$comunicados_url) {
+        $comunicados_url = home_url('/comunicados/');
+    }
+
+    $eventos_category = get_category_by_slug('eventos');
+    $eventos_url = $eventos_category ? get_category_link($eventos_category->term_id) : $comunicados_url;
+
+    $circulares_category = get_category_by_slug('circulares');
+    $circulares_url = $circulares_category ? get_category_link($circulares_category->term_id) : $comunicados_url;
+
     // Estilos dinámicos para móvil
     $link_classes = $has_header_image
         ? 'text-white bg-white/15 hover:bg-white/25'
@@ -433,14 +526,43 @@ function edusiteco_default_mobile_menu()
         </div>
     </div>
 
+    <div class="border-b border-border-light dark:border-border-dark last:border-b-0">
+        <div class="flex items-center">
+            <a href="<?= esc_url($comunicados_url) ?>"
+                class="flex-1 pl-4 pr-4 py-3.5 text-base font-medium <?= $link_classes ?> transition-all">
+                Noticias
+            </a>
+            <button type="button" class="mobile-toggle flex-shrink-0 px-4 py-3.5 <?= $link_classes ?> transition-all"
+                aria-expanded="false" aria-controls="default-submenu-news" aria-label="Mostrar secciones de Noticias">
+                <svg class="w-4 h-4 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+        </div>
+        <div id="default-submenu-news" class="hidden">
+            <div class="pl-6">
+                <a class="block pl-8 pr-4 py-3 text-base font-medium <?= $submenu_link_classes ?> transition-all"
+                    href="<?= esc_url($comunicados_url) ?>">
+                    Comunicados
+                </a>
+                <a class="block pl-8 pr-4 py-3 text-base font-medium <?= $submenu_link_classes ?> transition-all"
+                    href="<?= esc_url($contratacion_url) ?>">
+                    Convocatorias
+                </a>
+                <a class="block pl-8 pr-4 py-3 text-base font-medium <?= $submenu_link_classes ?> transition-all"
+                    href="<?= esc_url($circulares_url) ?>">
+                    Circulares
+                </a>
+                <a class="block pl-8 pr-4 py-3 text-base font-medium <?= $submenu_link_classes ?> transition-all"
+                    href="<?= esc_url($eventos_url) ?>">
+                    Eventos
+                </a>
+            </div>
+        </div>
+    </div>
+
     <?php
     $prof_page = get_page_by_path('profesores');
     $profesores_url = $prof_page ? get_permalink($prof_page->ID) : '#';
     ?>
-    <a class="block pl-4 pr-4 py-3.5 text-base font-medium <?= $link_classes ?> border-b border-border-light dark:border-border-dark last:border-b-0 transition-all"
-        href="/comunicados/">
-        Comunicados
-    </a>
     <a class="block pl-4 pr-4 py-3.5 text-base font-medium <?= $link_classes ?> 
           border-b border-border-light dark:border-border-dark 
           last:border-b-0 transition-all"
@@ -450,10 +572,6 @@ function edusiteco_default_mobile_menu()
     <a class="block pl-4 pr-4 py-3.5 text-base font-medium <?= $link_classes ?> border-b border-border-light dark:border-border-dark last:border-b-0 transition-all"
         href="<?= esc_url($psico_url) ?>">
         Psicoorientación
-    </a>
-    <a class="block pl-4 pr-4 py-3.5 text-base font-medium <?= $link_classes ?> border-b border-border-light dark:border-border-dark last:border-b-0 transition-all"
-        href="<?= esc_url($contratacion_url) ?>">
-        Convocatorias
     </a>
 <?php
 }

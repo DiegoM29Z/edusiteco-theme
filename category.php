@@ -3,6 +3,7 @@
 <?php
 $current_category = get_queried_object();
 $is_event_category = isset($current_category->slug) && $current_category->slug === 'eventos';
+$is_circular_category = isset($current_category->slug) && $current_category->slug === 'circulares';
 ?>
 <main id="primary" class="site-main <?php echo $is_event_category ? 'lg:max-w-[96%]' : 'lg:max-w-[80%]'; ?> mx-auto">
     <div class="<?php echo $is_event_category ? 'events-archive-panel' : 'bg-gray-50 dark:bg-gray-900 rounded-2xl shadow-lg p-6 md:p-10 border border-gray-200 dark:border-gray-700 my-8'; ?>">
@@ -109,21 +110,38 @@ $is_event_category = isset($current_category->slug) && $current_category->slug =
 								</div>
 							<?php else: ?>
 								<div class="relative overflow-hidden">
-									<!-- Fondo con SVG -->
-									<div class="h-52 bg-brand-primary text-white/10 transition-transform duration-500 group-hover:scale-105">
-										<svg viewBox="0 0 1000 500" fill="currentColor" class="w-full h-full">
-											<circle cx="200" cy="100" r="80" opacity="0.1" />
-											<circle cx="800" cy="150" r="120" opacity="0.05" />
-											<circle cx="400" cy="400" r="100" opacity="0.08" />
-										</svg>
-									</div>
-									<!-- Texto superpuesto -->
-									<div class="absolute inset-0 flex items-center justify-center p-4 text-white">
-										<div class="text-center">
-											<span class="block text-lg font-semibold">Comunicado</span>
-											<span class="block text-sm opacity-80 uppercase font-bold"><?php echo get_bloginfo('name'); ?></span>
+									<?php if ($is_circular_category): ?>
+										<div class="circular-placeholder">
+											<div class="circular-placeholder__card">
+												<div class="circular-placeholder__icon">
+													<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M7 3.75h7l4 4v12.5H7a2 2 0 0 1-2-2v-13a1.5 1.5 0 0 1 2-1.5Z" />
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M14 4v4h4M8.5 12h7m-7 3.5h7" />
+													</svg>
+												</div>
+												<div class="circular-placeholder__copy">
+													<span class="circular-placeholder__eyebrow">Información institucional</span>
+													<span class="circular-placeholder__title">Circulares</span>
+													<span class="circular-placeholder__school"><?php echo esc_html(get_bloginfo('name')); ?></span>
+												</div>
+												<span class="circular-placeholder__accent" aria-hidden="true"></span>
+											</div>
 										</div>
-									</div>
+									<?php else: ?>
+										<div class="h-52 bg-brand-primary text-white/10 transition-transform duration-500 group-hover:scale-105">
+											<svg viewBox="0 0 1000 500" fill="currentColor" class="h-full w-full">
+												<circle cx="200" cy="100" r="80" opacity="0.1" />
+												<circle cx="800" cy="150" r="120" opacity="0.05" />
+												<circle cx="400" cy="400" r="100" opacity="0.08" />
+											</svg>
+										</div>
+										<div class="absolute inset-0 flex items-center justify-center p-4 text-white">
+											<div class="text-center">
+												<span class="block text-lg font-semibold">Comunicado</span>
+												<span class="block text-sm font-bold uppercase opacity-80"><?php echo esc_html(get_bloginfo('name')); ?></span>
+											</div>
+										</div>
+									<?php endif; ?>
 								</div>
 							<?php endif; ?>
 
@@ -199,7 +217,7 @@ $is_event_category = isset($current_category->slug) && $current_category->slug =
                 wp_reset_postdata();
             else: ?>
                 <div class="flex justify-center">
-                    <p class="bg-brand-primary-100 p-4 rounded-md text-text-light dark:text-text-dark"><?php echo $is_event_category ? 'No hay eventos disponibles en este momento.' : 'No hay convocatorias disponibles en este momento.'; ?>
+                    <p class="bg-brand-primary-100 p-4 rounded-md text-text-light dark:text-text-dark"><?php echo $is_event_category ? 'No hay eventos disponibles en este momento.' : ($is_circular_category ? 'No hay circulares disponibles en este momento.' : 'No hay convocatorias disponibles en este momento.'); ?>
                     </p>
                 </div>
             <?php endif; ?>
