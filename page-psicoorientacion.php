@@ -93,8 +93,52 @@ $emergencias = trim($o['psico_emergencias'] ?? 'Si hay peligro inmediato, llama 
             'orderby'        => 'date',
             'order'          => 'DESC',
         ));
-        $recursos_publicos = array();
+        $resource_files_url = get_template_directory_uri() . '/assets/psicoorientacion/';
+        $recursos_publicos = array(
+            array(
+                'title'         => 'Estrategias emocionales para aulas multigrado',
+                'content'       => 'En grupos con edades distintas, trabaja un tema común —emociones, enojo, empatía, conflictos o autocuidado— y adapta la profundidad según el desarrollo. Los más pequeños pueden identificar y expresar emociones; los mayores, analizar causas y proponer soluciones. Se sugieren tutoría entre pares, juegos cooperativos, cuentos, dramatizaciones, música, rueda emocional, semáforo y rincón de calma. Conecta las actividades con experiencias de la comunidad y valora la participación sin comparar a estudiantes de distintas edades.',
+                'attachment_id' => 0,
+                'file_url'      => $resource_files_url . 'Estrategias_Aulas_Multigrado.pdf',
+                'is_pdf'        => true,
+                'is_image'      => false,
+            ),
+            array(
+                'title'         => 'Identidad y proyecto de vida en adolescencia',
+                'content'       => 'Las mallas disponibles de 7.º, 8.º, 9.º y 11.º abordan identidad, cambios, autoestima, pertenencia, relaciones, autocuidado y toma de decisiones. En secundaria se reflexiona sobre la presión de pares y redes, el manejo de emociones, los riesgos y los hábitos saludables; en 11.º se incorpora el proyecto de vida y decisiones con impacto personal y colectivo. La propuesta recomienda actividades de reflexión, acuerdos grupales y registro personal, acompañados por adultos de confianza.',
+                'attachment_id' => 0,
+                'file_url'      => $resource_files_url . 'Mallas_Adolescencia_7_8_9_11.pdf',
+                'is_pdf'        => true,
+                'is_image'      => false,
+            ),
+            array(
+                'title'         => 'Habilidades socioemocionales en primaria',
+                'content'       => 'Las mallas de 1.º a 5.º proponen fortalecer el autoconocimiento, la autoestima, el reconocimiento y la regulación de emociones, la autonomía y las decisiones responsables, la empatía, la comunicación, la cooperación y la convivencia. Las actividades combinan experiencias lúdicas, acuerdos de aula y reflexión en la agenda emocional: reconocer cualidades y gustos, valorar logros, expresar lo que se siente y pensar en las consecuencias de las acciones. Ajusta cada actividad al grado y al contexto del grupo.',
+                'attachment_id' => 0,
+                'file_url'      => $resource_files_url . 'Mallas_Primaria_1_a_5.pdf',
+                'is_pdf'        => true,
+                'is_image'      => false,
+            ),
+            array(
+                'title'         => 'Educacion Inicial',
+                'content'       => 'Tiene como fin crear e implementar la Cátedra de Educación Emocional en los niveles preescolar, básica y media, en concordancia con el Proyecto Educativo Institucional (PEI). En preescolar (3 a 5 años), la malla propone fortalecer la autoestima, la autorregulación con apoyo adulto, la empatía, las habilidades sociales y la toma de decisiones sencillas. Sugiere trabajar alegría, tristeza, enojo, miedo y sorpresa mediante juego simbólico, cuentos, canciones, experiencias sensoriales, respiración y rutinas de calma. Propone una hora semanal, integrable en las rutinas, y evaluar mediante observación directa en juegos y actividades cotidianas.',
+                'attachment_id' => 0,
+                'file_url'      => $resource_files_url . 'preschool.pdf',
+                'is_pdf'        => true,
+                'is_image'      => false,
+            ),
+        );
+        $recursos_base_titulos = array();
+        foreach ($recursos_publicos as $recurso_base) {
+            $recursos_base_titulos[sanitize_title($recurso_base['title'])] = true;
+        }
+
         foreach ($recursos as $recurso) {
+            $resource_title = get_the_title($recurso->ID);
+            if (isset($recursos_base_titulos[sanitize_title($resource_title)])) {
+                continue;
+            }
+
             $attachment_id = (int) get_post_meta($recurso->ID, 'recurso_attachment_id', true);
             if (!$attachment_id) {
                 $attachment_id = get_post_thumbnail_id($recurso->ID);
@@ -105,49 +149,12 @@ $emergencias = trim($o['psico_emergencias'] ?? 'Si hay peligro inmediato, llama 
             $mime = $attachment_id ? get_post_mime_type($attachment_id) : '';
             $recursos_publicos[] = array(
                 'id'            => $recurso->ID,
-                'title'         => get_the_title($recurso->ID),
+                'title'         => $resource_title,
                 'content'       => $resource_content,
                 'attachment_id' => $attachment_id,
                 'file_url'      => $file_url,
                 'is_pdf'        => $mime && strpos($mime, 'pdf') !== false,
                 'is_image'      => $mime && strpos($mime, 'image/') === 0,
-            );
-        }
-        if (empty($recursos_publicos)) {
-            $resource_files_url = get_template_directory_uri() . '/assets/psicoorientacion/';
-            $recursos_publicos = array(
-                array(
-                    'title'         => 'Estrategias emocionales para aulas multigrado',
-                    'content'       => 'En grupos con edades distintas, trabaja un tema común —emociones, enojo, empatía, conflictos o autocuidado— y adapta la profundidad según el desarrollo. Los más pequeños pueden identificar y expresar emociones; los mayores, analizar causas y proponer soluciones. Se sugieren tutoría entre pares, juegos cooperativos, cuentos, dramatizaciones, música, rueda emocional, semáforo y rincón de calma. Conecta las actividades con experiencias de la comunidad y valora la participación sin comparar a estudiantes de distintas edades.',
-                    'attachment_id' => 0,
-                    'file_url'      => $resource_files_url . 'Estrategias_Aulas_Multigrado.pdf',
-                    'is_pdf'        => true,
-                    'is_image'      => false,
-                ),
-                array(
-                    'title'         => 'Identidad y proyecto de vida en adolescencia',
-                    'content'       => 'Las mallas disponibles de 7.º, 8.º, 9.º y 11.º abordan identidad, cambios, autoestima, pertenencia, relaciones, autocuidado y toma de decisiones. En secundaria se reflexiona sobre la presión de pares y redes, el manejo de emociones, los riesgos y los hábitos saludables; en 11.º se incorpora el proyecto de vida y decisiones con impacto personal y colectivo. La propuesta recomienda actividades de reflexión, acuerdos grupales y registro personal, acompañados por adultos de confianza.',
-                    'attachment_id' => 0,
-                    'file_url'      => $resource_files_url . 'Mallas_Adolescencia_7_8_9_11.pdf',
-                    'is_pdf'        => true,
-                    'is_image'      => false,
-                ),
-                array(
-                    'title'         => 'Habilidades socioemocionales en primaria',
-                    'content'       => 'Las mallas de 1.º a 5.º proponen fortalecer el autoconocimiento, la autoestima, el reconocimiento y la regulación de emociones, la autonomía y las decisiones responsables, la empatía, la comunicación, la cooperación y la convivencia. Las actividades combinan experiencias lúdicas, acuerdos de aula y reflexión en la agenda emocional: reconocer cualidades y gustos, valorar logros, expresar lo que se siente y pensar en las consecuencias de las acciones. Ajusta cada actividad al grado y al contexto del grupo.',
-                    'attachment_id' => 0,
-                    'file_url'      => $resource_files_url . 'Mallas_Primaria_1_a_5.pdf',
-                    'is_pdf'        => true,
-                    'is_image'      => false,
-                ),
-                array(
-                    'title'         => 'Educacion Inicial',
-                    'content'       => 'Tiene como fin crear e implementar la Cátedra de Educación Emocional en los niveles preescolar, básica y media, en concordancia con el Proyecto Educativo Institucional (PEI). En preescolar (3 a 5 años), la malla propone fortalecer la autoestima, la autorregulación con apoyo adulto, la empatía, las habilidades sociales y la toma de decisiones sencillas. Sugiere trabajar alegría, tristeza, enojo, miedo y sorpresa mediante juego simbólico, cuentos, canciones, experiencias sensoriales, respiración y rutinas de calma. Propone una hora semanal, integrable en las rutinas, y evaluar mediante observación directa en juegos y actividades cotidianas.',
-                    'attachment_id' => 0,
-                    'file_url'      => $resource_files_url . 'preschool.pdf',
-                    'is_pdf'        => true,
-                    'is_image'      => false,
-                ),
             );
         }
         if (!empty($recursos_publicos)):
