@@ -423,6 +423,12 @@ function edusiteco_default_menu()
                 <span>Psicoorientación</span>
             </a>
         </li>
+        <li class="header-group">
+            <a class="<?= $link_class ?> text-sm font-semibold underline-link transition-all px-3 py-2 rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+                href="<?= esc_url($contratacion_url) ?>">
+                <span>Convocatorias</span>
+            </a>
+        </li>
     </ul>
 
 <?php
