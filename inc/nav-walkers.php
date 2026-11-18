@@ -251,11 +251,6 @@ function edusiteco_append_news_to_primary_menu($items, $args)
         $comunicados_url = home_url('/comunicados/');
     }
 
-    $contratacion_page = get_page_by_path('portal-de-contratacion');
-    $contratacion_url = $contratacion_page
-        ? get_permalink($contratacion_page->ID)
-        : home_url('/portal-de-contratacion/');
-
     $eventos_category = get_category_by_slug('eventos');
     $eventos_url = $eventos_category
         ? get_category_link($eventos_category->term_id)
@@ -284,7 +279,6 @@ function edusiteco_append_news_to_primary_menu($items, $args)
         $items .= '<svg class="w-5 h-5 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
         $items .= '</button></div><div id="primary-mobile-news" class="hidden"><ul class="pl-6 space-y-0">';
         $items .= '<li><a class="block pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_submenu_classes) . ' transition-all" href="' . esc_url($comunicados_url) . '">Comunicados</a></li>';
-        $items .= '<li><a class="block pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_submenu_classes) . ' transition-all" href="' . esc_url($contratacion_url) . '">Convocatorias</a></li>';
         $items .= '<li><a class="block pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_submenu_classes) . ' transition-all" href="' . esc_url($circulares_url) . '">Circulares</a></li>';
         $items .= '<li><a class="block pl-4 pr-4 py-3.5 text-base font-medium ' . esc_attr($mobile_submenu_classes) . ' transition-all" href="' . esc_url($eventos_url) . '">Eventos</a></li>';
         $items .= '</ul></div></li>';
@@ -305,7 +299,6 @@ function edusiteco_append_news_to_primary_menu($items, $args)
     $items .= '<svg class="w-5 h-5 ml-1 ' . esc_attr($desktop_icon_classes) . ' group-hover:rotate-180 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>';
     $items .= '<ul class="submenu">';
     $items .= '<li><a class="submenu-item" href="' . esc_url($comunicados_url) . '">Comunicados</a></li>';
-    $items .= '<li><a class="submenu-item" href="' . esc_url($contratacion_url) . '">Convocatorias</a></li>';
     $items .= '<li><a class="submenu-item" href="' . esc_url($circulares_url) . '">Circulares</a></li>';
     $items .= '<li><a class="submenu-item" href="' . esc_url($eventos_url) . '">Eventos</a></li>';
     $items .= '</ul></li>';
@@ -376,7 +369,6 @@ function edusiteco_default_menu()
             <?php
             $comunicados_archive_url = get_post_type_archive_link('comunicado');
 
-            $convocatorias_url = $contratacion_url;
             $eventos_category = get_category_by_slug('eventos');
             $eventos_url       = $eventos_category ? get_category_link($eventos_category->term_id) : '#';
 
@@ -393,11 +385,6 @@ function edusiteco_default_menu()
                 <li>
                     <a class="submenu-item" href="<?php echo esc_url($comunicados_archive_url); ?>">
                         Comunicados
-                    </a>
-                </li>
-                <li>
-                    <a class="submenu-item" href="<?php echo esc_url($convocatorias_url); ?>">
-                        Convocatorias
                     </a>
                 </li>
                 <li>
@@ -436,12 +423,6 @@ function edusiteco_default_menu()
                 <span>Psicoorientación</span>
             </a>
         </li>
-        <li class="header-group">
-            <a class="<?= $link_class ?> text-sm font-semibold underline-link transition-all px-3 py-2 rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
-                href="<?= esc_url($contratacion_url) ?>">
-                <span>Convocatorias</span>
-            </a>
-        </li>
     </ul>
 
 <?php
@@ -463,9 +444,6 @@ function edusiteco_default_mobile_menu()
 
     $directory_page = get_page_by_path('directorio');
     $directory_url = $directory_page ? get_permalink($directory_page->ID) : '#';
-
-    $contratacion_page = get_page_by_path('portal-de-contratacion');
-    $contratacion_url = $contratacion_page ? get_permalink($contratacion_page->ID) : home_url('/portal-de-contratacion/');
 
     $symbols_page = get_page_by_path('simbolos-institucionales');
     $symbols_url = $symbols_page ? get_permalink($symbols_page->ID) : '#';
@@ -542,10 +520,6 @@ function edusiteco_default_mobile_menu()
                 <a class="block pl-8 pr-4 py-3 text-base font-medium <?= $submenu_link_classes ?> transition-all"
                     href="<?= esc_url($comunicados_url) ?>">
                     Comunicados
-                </a>
-                <a class="block pl-8 pr-4 py-3 text-base font-medium <?= $submenu_link_classes ?> transition-all"
-                    href="<?= esc_url($contratacion_url) ?>">
-                    Convocatorias
                 </a>
                 <a class="block pl-8 pr-4 py-3 text-base font-medium <?= $submenu_link_classes ?> transition-all"
                     href="<?= esc_url($circulares_url) ?>">
