@@ -487,3 +487,814 @@ html.dark .circular-placeholder__school {
 html.dark .circular-placeholder__title {
     color: #f1f7fa;
 }
+
+.psico-page {
+    overflow: hidden;
+    background: transparent;
+}
+
+.psico-hero {
+    position: relative;
+    display: flex;
+    min-height: clamp(22rem, 50vh, 30rem);
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 5rem max(1.5rem, calc((100% - 72rem) / 2));
+    color: #fff;
+    background-position: center;
+    background-size: cover;
+    border-bottom: 1px solid rgba(255, 255, 255, .16);
+    text-align: center;
+}
+
+.psico-hero__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 52rem);
+}
+
+.psico-eyebrow {
+    display: inline-block;
+    margin-bottom: .8rem;
+    color: #c5f3e8;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.psico-eyebrow--dark {
+    color: #b9d1ff;
+}
+
+.psico-hero h1 {
+    margin: 0 0 1rem;
+    color: #10213f;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -.025em;
+    line-height: 1.11;
+    text-wrap: balance;
+}
+
+.psico-hero__content > p {
+    max-width: 42rem;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, .9);
+    font-size: 1.125rem;
+    line-height: 1.56;
+}
+
+@media (min-width: 768px) {
+    .psico-hero h1 {
+        font-size: 3.75rem;
+        line-height: 1;
+    }
+
+    .psico-hero__content > p {
+        font-size: 1.5rem;
+        line-height: 1.33;
+    }
+}
+
+.psico-button {
+    display: inline-flex;
+    min-height: 2.9rem;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    padding: .75rem 1.15rem;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    font-size: .9rem;
+    font-weight: 750;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.psico-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(7, 28, 43, .2);
+}
+
+.psico-button .material-icons {
+    font-size: 1.15rem;
+}
+
+.psico-button--light {
+    border-color: rgba(255, 255, 255, .58);
+    background: rgba(255, 255, 255, .82);
+    color: #145b73;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.psico-button--light:hover {
+    background: #eaf8f5;
+    color: #104c62;
+}
+
+.psico-button--outline {
+    border-color: rgba(255, 255, 255, .5);
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+}
+
+.psico-button--outline:hover {
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+}
+
+.psicoorientacion-backdrop {
+    padding: 1px 1.25rem 4rem;
+    background: rgba(13, 23, 33, .54);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.psico-page__content {
+    width: min(100%, 72rem);
+    margin: 0 auto;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    border: 1px solid rgba(148, 163, 184, .24);
+    border-radius: 1.5rem;
+    background: rgba(15, 23, 42, .78);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.psico-section {
+    margin-bottom: 5rem;
+    scroll-margin-top: 2rem;
+}
+
+.psico-section__heading {
+    max-width: 44rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.psico-section__heading h2,
+.psico-appointment h2,
+.psico-emergency h2 {
+    margin: 0 0 .65rem;
+    color: #f8fafc;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -.025em;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+.psico-section__heading p {
+    margin: 0;
+    color: rgba(226, 232, 240, .88);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.psico-support-grid,
+.psico-tips__grid,
+.psico-resources__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.psico-support-card,
+.psico-tip-card,
+.psico-resource-card {
+    min-width: 0;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 1rem;
+    background: rgba(30, 41, 59, .66);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.psico-support-card {
+    padding: 1.35rem;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.psico-support-card:hover,
+.psico-tip-card:hover,
+.psico-resource-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(29, 57, 76, .11);
+}
+
+.psico-support-card__icon {
+    display: grid;
+    width: 3.2rem;
+    height: 3.2rem;
+    place-items: center;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    background: rgba(112, 157, 255, .18);
+    color: #c1d5ff;
+}
+
+.psico-support-card__icon .material-icons {
+    font-size: 1.65rem;
+}
+
+.psico-support-card h3,
+.psico-tip-card h3,
+.psico-resource-card h3 {
+    margin: 0 0 .55rem;
+    color: #f8fafc;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.psico-support-card p,
+.psico-tip-card p {
+    margin: 0;
+    color: rgba(226, 232, 240, .88);
+    font-size: .9rem;
+    line-height: 1.65;
+}
+
+.psico-tips {
+    padding: clamp(1.25rem, 3vw, 2.2rem);
+    border: 1px solid rgba(147, 197, 253, .22);
+    border-radius: 1.5rem;
+    background: rgba(51, 102, 204, .16);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.psico-tips .psico-section__heading {
+    margin-bottom: 1.5rem;
+}
+
+.psico-tip-card {
+    padding: 1.2rem;
+    background: rgba(15, 23, 42, .42);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.psico-tip-card__icon {
+    display: grid;
+    width: 2.65rem;
+    height: 2.65rem;
+    place-items: center;
+    margin-bottom: .85rem;
+    border-radius: .85rem;
+    background: rgba(112, 157, 255, .18);
+    color: #c1d5ff;
+    font-size: 1.45rem;
+}
+
+.psico-tips__note {
+    margin: 1.25rem 0 0;
+    color: rgba(226, 232, 240, .72);
+    font-size: .8rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.psico-resources__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.2rem;
+}
+
+.psico-resources__grid--single .psico-resource-card {
+    grid-column: 1 / -1;
+    width: min(100%, 32rem);
+    justify-self: center;
+}
+
+.psico-resources__grid:not(.psico-resources__grid--single) > .psico-resource-card:last-child:nth-child(3n + 1) {
+    grid-column: 2;
+}
+
+.psico-resource-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 1.4rem;
+    border-color: rgba(151, 196, 224, .28);
+    background: linear-gradient(145deg, rgba(21, 43, 62, .96), rgba(11, 25, 40, .96));
+    transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.psico-resource-card::before {
+    position: absolute;
+    top: 0;
+    right: 1.4rem;
+    left: 1.4rem;
+    height: 3px;
+    border-radius: 0 0 999px 999px;
+    background: linear-gradient(90deg, #54d6c6, #79a9ff);
+    content: "";
+}
+
+.psico-resource-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(125, 211, 252, .58);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, .28);
+}
+
+.psico-resource-card__preview {
+    height: 12rem;
+    overflow: hidden;
+    margin: -1.25rem -1.25rem 1rem;
+    border-radius: 1rem 1rem 0 0;
+    background: rgba(15, 23, 42, .5);
+}
+
+.psico-resource-card__preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.psico-resource-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.psico-resource-card__top > .material-icons {
+    display: grid;
+    width: 2.8rem;
+    height: 2.8rem;
+    place-items: center;
+    border-radius: .85rem;
+    background: rgba(112, 157, 255, .16);
+    color: #c1d5ff;
+    font-size: 1.5rem;
+}
+
+.psico-resource-card__type {
+    padding: .3rem .6rem;
+    border-radius: 999px;
+    background: rgba(112, 157, 255, .16);
+    color: #d3e1ff;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.psico-resource-card__body {
+    flex: 1;
+}
+
+.psico-resource-card__excerpt,
+.psico-resource-card__description {
+    margin: 0;
+    color: rgba(226, 232, 240, .88);
+    font-size: .9rem;
+    line-height: 1.65;
+    text-align: left;
+    hyphens: auto;
+}
+
+body.page-template-page-psicoorientacion .psicoorientacion-backdrop .psico-resource-card .psico-resource-card__excerpt,
+body.page-template-page-psicoorientacion .psicoorientacion-backdrop .psico-resource-card .psico-resource-card__description p:not(.text-center) {
+    text-align: left;
+    text-justify: auto;
+}
+
+.psico-resource-card__description p {
+    margin: 0 0 .6rem;
+}
+
+.psico-resource-card__description p:last-child {
+    margin-bottom: 0;
+}
+
+.psico-resource-card__excerpt {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+.psico-resource-card__details {
+    margin-top: .55rem;
+}
+
+.psico-resource-card__details summary {
+    width: fit-content;
+    color: #a9cbff;
+    cursor: pointer;
+    font-size: .84rem;
+    font-weight: 800;
+    list-style-position: inside;
+}
+
+.psico-resource-card__details summary:hover {
+    color: #fff;
+}
+
+.psico-resource-card__details summary:focus-visible,
+.psico-resource-card__link:focus-visible {
+    border-radius: .35rem;
+    outline: 2px solid #8ce2dc;
+    outline-offset: 3px;
+}
+
+.psico-resource-card__read-less,
+.psico-resource-card__details[open] .psico-resource-card__read-more {
+    display: none;
+}
+
+.psico-resource-card__details[open] .psico-resource-card__read-less {
+    display: inline;
+}
+
+.psico-resource-card__details[open] .psico-resource-card__description {
+    margin-top: .45rem;
+}
+
+.psico-resource-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    align-self: flex-start;
+    margin-top: 1.2rem;
+    padding: .65rem .85rem;
+    border: 1px solid rgba(153, 193, 255, .28);
+    border-radius: .75rem;
+    background: rgba(88, 130, 206, .16);
+    color: #d3e2ff;
+    font-size: .88rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.psico-resource-card__link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(153, 193, 255, .58);
+    background: rgba(88, 130, 206, .3);
+    color: #fff;
+}
+
+.psico-resource-card__link .material-icons {
+    font-size: 1.1rem;
+}
+
+.psico-resource-card__pending {
+    margin: 1.2rem 0 0;
+    color: rgba(226, 232, 240, .72);
+    font-size: .82rem;
+}
+
+.psico-resources__empty {
+    display: flex;
+    min-height: 8rem;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    padding: 1.5rem;
+    border: 1px dashed rgba(255, 255, 255, .28);
+    border-radius: 1rem;
+    background: rgba(15, 23, 42, .42);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: rgba(226, 232, 240, .88);
+}
+
+.psico-resources__empty .material-icons {
+    color: #b9d1ff;
+}
+
+.psico-resources__empty p {
+    margin: 0;
+}
+
+.psico-appointment {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    width: min(100%, 60rem);
+    margin: 0 auto 1.5rem;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, .22);
+    background: linear-gradient(120deg, rgba(31, 65, 119, .72), rgba(51, 102, 204, .58));
+    box-shadow: 0 16px 35px rgba(24, 67, 87, .16);
+    color: #fff;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.psico-appointment__visual {
+    display: grid;
+    width: 5.5rem;
+    height: 5.5rem;
+    flex: 0 0 auto;
+    place-items: center;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, .65);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+}
+
+.psico-appointment__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.psico-appointment__visual .material-icons {
+    font-size: 3.5rem;
+}
+
+.psico-appointment__content {
+    flex: 1;
+}
+
+.psico-appointment h2 {
+    margin-bottom: .45rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 2.8vw, 1.9rem);
+}
+
+.psico-appointment__content > p {
+    max-width: 52rem;
+    margin: 0 0 .9rem;
+    color: rgba(255, 255, 255, .88);
+    line-height: 1.7;
+}
+
+.psico-emergency {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 180, 151, .35);
+    border-radius: 1.1rem;
+    background: rgba(111, 44, 34, .3);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.psico-emergency__icon {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border-radius: .9rem;
+    background: rgba(255, 178, 146, .18);
+    color: #ffd1bf;
+}
+
+.psico-emergency__icon .material-icons {
+    font-size: 1.6rem;
+}
+
+.psico-eyebrow--alert {
+    margin-bottom: .35rem;
+    color: #ffe0d3;
+}
+
+.psico-emergency h2 {
+    margin-bottom: .5rem;
+    color: #ffe0d3;
+    font-size: 1.35rem;
+}
+
+.psico-emergency p {
+    margin: 0;
+    color: rgba(255, 238, 230, .9);
+    line-height: 1.7;
+}
+
+.psico-emergency__contacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: .65rem;
+    margin-top: 1rem;
+}
+
+.psico-emergency__contact {
+    display: flex;
+    min-height: 3.25rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: .55rem .75rem;
+    border: 1px solid rgba(255, 224, 211, .35);
+    border-radius: .75rem;
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+    text-decoration: none;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.psico-emergency__contact:hover,
+.psico-emergency__contact:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(255, 224, 211, .75);
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+}
+
+.psico-emergency__contact:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+.psico-emergency__number {
+    font-weight: 800;
+}
+
+.psico-emergency__label {
+    color: rgba(255, 238, 230, .88);
+    font-size: .82rem;
+    line-height: 1.35;
+}
+
+.psico-emergency__note {
+    margin-top: .75rem !important;
+    font-size: .86rem;
+    font-weight: 650;
+}
+
+html.dark .psico-page {
+    background: transparent;
+}
+
+html.dark .psicoorientacion-backdrop {
+    background: rgba(13, 23, 33, .58);
+}
+
+html.dark .psico-section__heading h2,
+html.dark .psico-support-card h3,
+html.dark .psico-tip-card h3,
+html.dark .psico-resource-card h3 {
+    color: #fff;
+}
+
+html.dark .psico-section__heading p,
+html.dark .psico-support-card p,
+html.dark .psico-tip-card p,
+html.dark .psico-resource-card__description {
+    color: rgba(255, 255, 255, .86);
+}
+
+html.dark .psico-support-card,
+html.dark .psico-tip-card,
+html.dark .psico-resource-card {
+    border-color: rgba(255, 255, 255, .2);
+    background: rgba(13, 28, 42, .68);
+}
+
+html.dark .psico-resource-card {
+    border-color: rgba(151, 196, 224, .28);
+    background: linear-gradient(145deg, rgba(21, 43, 62, .96), rgba(11, 25, 40, .96));
+}
+
+html.dark .psico-support-card__icon,
+html.dark .psico-tip-card__icon {
+    background: rgba(112, 157, 255, .18);
+    color: #c1d5ff;
+}
+
+html.dark .psico-tips {
+    border-color: rgba(255, 255, 255, .22);
+    background: rgba(51, 102, 204, .18);
+}
+
+html.dark .psico-tips__note,
+html.dark .psico-resource-card__pending {
+    color: rgba(255, 255, 255, .76);
+}
+
+html.dark .psico-resource-card__top > .material-icons {
+    background: rgba(171, 218, 237, .15);
+    color: #c7e9f8;
+}
+
+html.dark .psico-resource-card__type {
+    background: rgba(112, 157, 255, .18);
+    color: #d3e1ff;
+}
+
+html.dark .psico-resource-card__link {
+    border-color: rgba(153, 193, 255, .28);
+    background: rgba(88, 130, 206, .16);
+    color: #d3e2ff;
+}
+
+html.dark .psico-resource-card__details summary {
+    color: #a9cbff;
+}
+
+html.dark .psico-resources__empty {
+    border-color: rgba(255, 255, 255, .3);
+    background: rgba(13, 28, 42, .58);
+    color: rgba(255, 255, 255, .86);
+}
+
+html.dark .psico-emergency {
+    border-color: rgba(255, 180, 151, .35);
+    background: rgba(111, 44, 34, .3);
+}
+
+html.dark .psico-emergency__icon {
+    background: rgba(255, 178, 146, .18);
+    color: #ffd1bf;
+}
+
+html.dark .psico-eyebrow--alert,
+html.dark .psico-emergency h2 {
+    color: #ffe0d3;
+}
+
+html.dark .psico-emergency p {
+    color: rgba(255, 238, 230, .9);
+}
+
+html.dark .psico-eyebrow--dark {
+    color: #b9d1ff;
+}
+
+html.dark .psico-support-card h3,
+html.dark .psico-tip-card h3,
+html.dark .psico-resource-card h3 {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .35);
+}
+
+body.custom-background .site-main > .psico-hero:not(.hero-section):not([style*="background"]) {
+    background-color: transparent !important;
+}
+
+body.custom-background .psicoorientacion-backdrop {
+    background-color: rgba(13, 23, 33, .54);
+}
+
+html.dark body.custom-background .psicoorientacion-backdrop {
+    background-color: rgba(13, 23, 33, .54);
+}
+
+@media (max-width: 900px) {
+    .psico-support-grid,
+    .psico-tips__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .psico-resources__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .psico-resources__grid:not(.psico-resources__grid--single) > .psico-resource-card:last-child:nth-child(3n + 1) {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .psico-hero {
+        min-height: 24rem;
+        padding: 3rem 1.25rem;
+    }
+
+    .psicoorientacion-backdrop {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .psico-page__content {
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    .psico-section {
+        margin-bottom: 3.5rem;
+    }
+
+    .psico-support-grid,
+    .psico-tips__grid,
+    .psico-resources__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .psico-appointment {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .psico-appointment__visual {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+
+    .psico-emergency {
+        grid-template-columns: 1fr;
+    }
+}

@@ -7,6 +7,43 @@ get_header();
 
 $opts = get_option('info_colegio_settings');
 $c = $opts['contacto'] ?? [];
+
+$contact_email = 'practicaempresarialmakros@gmail.com';
+$form_message = '';
+$form_status = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
+    $nombre = isset($_POST['nombre']) ? sanitize_text_field(wp_unslash($_POST['nombre'])) : '';
+    $email = isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '';
+    $asunto = isset($_POST['asunto']) ? sanitize_text_field(wp_unslash($_POST['asunto'])) : 'Mensaje desde la página de contacto';
+    $mensaje = isset($_POST['mensaje']) ? sanitize_textarea_field(wp_unslash($_POST['mensaje'])) : '';
+
+    if ($nombre && $email && $mensaje && is_email($email)) {
+        $headers = array(
+            'Content-Type: text/html; charset=UTF-8',
+            'From: ' . $nombre . ' <' . $email . '>',
+        );
+
+        $body = '<div style="font-family:Arial,sans-serif; line-height:1.6;">';
+        $body .= '<h3 style="margin-bottom:12px;">Nuevo mensaje desde la página de contacto</h3>';
+        $body .= '<p><strong>Nombre:</strong> ' . esc_html($nombre) . '</p>';
+        $body .= '<p><strong>Correo:</strong> ' . esc_html($email) . '</p>';
+        $body .= '<p><strong>Asunto:</strong> ' . esc_html($asunto) . '</p>';
+        $body .= '<p><strong>Mensaje:</strong><br>' . nl2br(esc_html($mensaje)) . '</p>';
+        $body .= '</div>';
+
+        if (wp_mail($contact_email, $asunto, $body, $headers)) {
+            $form_status = 'success';
+            $form_message = '✅ Tu mensaje ha sido enviado correctamente.';
+        } else {
+            $form_status = 'error';
+            $form_message = '⚠️ No se pudo enviar el mensaje en este momento. Inténtalo de nuevo más tarde.';
+        }
+    } else {
+        $form_status = 'error';
+        $form_message = '⚠️ Completa todos los campos obligatorios y usa un correo válido.';
+    }
+}
 ?>
 <div class="bg-gradient-to-b from-background-light to-gray-50 dark:from-background-dark dark:to-slate-900 py-16 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
@@ -34,7 +71,8 @@ $c = $opts['contacto'] ?? [];
                     Envíanos un Mensaje
                 </h2>
 
-                <form class="space-y-6" id="contact-form">
+                <form class="space-y-6" id="contact-form" method="post" action="">
+                    <input type="hidden" name="contact_submit" value="1">
 
                     <!-- Campo Nombre -->
                     <div class="form-group">
@@ -107,6 +145,12 @@ $c = $opts['contacto'] ?? [];
                         </button>
                     </div>
 
+                    <?php if ($form_message): ?>
+                        <div class="rounded-lg px-4 py-3 text-sm <?php echo $form_status === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'; ?>">
+                            <?php echo esc_html($form_message); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Nota de campos requeridos -->
                     <p class="text-sm text-gray-500 dark:text-gray-400 text-center">
                         Los campos marcados con <span class="text-red-500">*</span> son obligatorios
@@ -123,7 +167,7 @@ $c = $opts['contacto'] ?? [];
             // Valores con fallback
             $direccion = trim($c['direccion'] ?? '');
             $telefono  = trim($c['telefono'] ?? '');
-            $email     = trim($c['correo'] ?? '');
+            $email     = trim($c['correo'] ?? 'practicaempresarialmakros@gmail.com');
             $horario   = trim($c['horario'] ?? '');
             $mapa_raw  = trim($c['mapa'] ?? ''); // puede ser iframe completo o url de maps
             ?>
@@ -322,32 +366,26 @@ $c = $opts['contacto'] ?? [];
 
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
-
-                        // Eventos del formulario (solo validación visual)
                         const form = document.getElementById('contact-form');
+                        if (!form) return;
 
                         form.addEventListener('submit', function(e) {
-                            e.preventDefault();
-
-                            // Validar campos
                             const nombre = document.getElementById('nombre').value.trim();
                             const email = document.getElementById('email').value.trim();
                             const mensaje = document.getElementById('mensaje').value.trim();
 
                             if (!nombre || !email || !mensaje) {
+                                e.preventDefault();
                                 alert('Por favor, completa todos los campos obligatorios.');
                                 return;
                             }
 
-                            // Validar email
                             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                             if (!emailRegex.test(email)) {
+                                e.preventDefault();
                                 alert('Por favor, ingresa un correo electrónico válido.');
                                 return;
                             }
-
-                            alert('✅ Mensaje validado correctamente.\n\nEn una versión completa, aquí se enviaría el formulario.');
-                            form.reset();
                         });
                     });
                 </script>

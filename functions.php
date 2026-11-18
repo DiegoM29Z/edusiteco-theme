@@ -119,6 +119,27 @@ function edusiteco_content_width() {
 add_action( 'after_setup_theme', 'edusiteco_content_width', 0 );
 
 /**
+ * Configure SMTP for Gmail so wp_mail() works correctly.
+ */
+function edusiteco_configure_gmail_smtp( $phpmailer ) {
+	if ( ! defined( 'EDUSITECO_SMTP_USER' ) || ! defined( 'EDUSITECO_SMTP_PASS' ) ) {
+		return;
+	}
+
+	$phpmailer->isSMTP();
+	$phpmailer->Host       = EDUSITECO_SMTP_HOST;
+	$phpmailer->Port       = EDUSITECO_SMTP_PORT;
+	$phpmailer->SMTPSecure = EDUSITECO_SMTP_SECURE;
+	$phpmailer->SMTPAuth   = true;
+	$phpmailer->Username   = EDUSITECO_SMTP_USER;
+	$phpmailer->Password   = EDUSITECO_SMTP_PASS;
+	$phpmailer->From       = EDUSITECO_SMTP_USER;
+	$phpmailer->FromName   = defined( 'EDUSITECO_SMTP_FROM_NAME' ) ? EDUSITECO_SMTP_FROM_NAME : 'Práctica Empresarial Makros';
+	$phpmailer->SMTPAutoTLS = false;
+}
+add_action( 'phpmailer_init', 'edusiteco_configure_gmail_smtp' );
+
+/**
  * Add editable section headings to the WordPress page editor.
  */
 function edusiteco_add_identity_headings_metabox() {
