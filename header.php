@@ -20,7 +20,7 @@
 						<img alt="Logo Gov.co" class="h-6"
 							src="<?php echo get_theme_file_uri("assets/img/govco.png"); ?>" />
 					</a>
-					<div class="hidden md:flex items-center space-x-6">
+					<div class="flex items-center space-x-4">
 						<?php
 						// Obtener el enlace a la página de transparencia
 						$transparency_page = get_page_by_path('transparencia-y-acceso-a-la-informacion-publica');
@@ -50,25 +50,6 @@
 							</svg>
 						</button>
 					</div>
-					<div class="md:hidden">
-						<button class="text-white p-2 bg-gray-100 hover:bg-gray-300 transition-colors"
-							id="mobile-menu-button">
-							<img class="w-6" src="<?php echo get_theme_file_uri("assets/svg/menu-burger.svg") ?>"
-								alt="<?php echo esc_attr_e('Menu ITA', 'edusiteco'); ?>" />
-						</button>
-					</div>
-				</div>
-			</div>
-
-			<!-- Mobile Menu (Top) -->
-			<div class="hidden md:hidden bg-gov-top backdrop-blur-sm" id="mobile-menu">
-				<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-					<a class="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
-						href="<?php echo esc_url($transparency_url); ?>">Transparencia</a>
-					<a class="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
-						href="https://www.gov.co/participa/" target="_blank" rel="noopener noreferrer">Participa</a>
-					<a class="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
-						href="#">Directorio</a>
 				</div>
 			</div>
 
