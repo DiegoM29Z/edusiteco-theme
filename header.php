@@ -34,21 +34,9 @@
 						<a class="text-white text-sm font-medium hover:underline"
 							href="<?php echo esc_url($participes_url); ?>" target="_blank"
 							rel="noopener noreferrer">Participa</a>
-						<button id="theme-toggle"
-							class="p-2 rounded-full flex justify-center items-center text-white bg-white/10 hover:bg-white/20 transition-colors"
-							aria-label="Cambiar tema" title="Cambiar tema">
-							<svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none"
-								xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-								<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" stroke="currentColor"
-									stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
-							<svg class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="none"
-								xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-								<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7" />
-								<path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"
-									stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-							</svg>
-						</button>
+						<div class="header-topbar-search">
+							<?php get_search_form(); ?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -125,14 +113,40 @@
 								}
 								?>
 							</nav>
+							<div class="flex items-center space-x-4 header-administrative-actions">
+								<?php $menu_titles = edusiteco_get_primary_menu_titles(); ?>
+								<details class="relative header-group header-administrative-menu">
+									<summary class="inline-flex cursor-pointer list-none items-center text-text-light dark:text-text-dark text-sm font-medium hover:underline">
+										<span><?php echo esc_html($menu_titles['administrativa_financiera']); ?></span>
+										<svg class="w-4 h-4 ml-1 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+									</summary>
+									<ul class="submenu">
+										<li><a class="submenu-item" href="#">Asignación Académica</a></li>
+										<li><a class="submenu-item" href="#">Jornada Escolar</a></li>
+										<li><a class="submenu-item" href="#">FOSES</a></li>
+										<li><a class="submenu-item" href="#">Pagos</a></li>
+									</ul>
+								</details>
+
+								<button id="theme-toggle"
+									class="p-2 rounded-full flex justify-center items-center text-white bg-brand-primary-600 hover:bg-brand-primary-700 transition-colors"
+									aria-label="Cambiar tema" title="Cambiar tema">
+									<svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none"
+										xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+										<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" stroke="currentColor"
+											stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+									<svg class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="none"
+										xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+										<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7" />
+										<path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l-1.42-1.42m11.3-11.3 1.42-1.42"
+											stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+									</svg>
+								</button>
+							</div>
 						</div>
 
 						<div class="flex items-center space-x-4">
-							<!-- Search Bar -->
-							<div class="hidden md:block relative">
-								<?php get_search_form(); ?>
-							</div>
-
 							<!-- Mobile Menu Button -->
 							<div class="lg:hidden">
 								<button

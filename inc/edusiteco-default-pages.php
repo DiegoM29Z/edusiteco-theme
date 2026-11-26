@@ -34,6 +34,12 @@ function edusiteco_create_default_pages() {
             'page_template' => 'page-directory.php',
         ),
         array(
+            'page_title'    => 'Manual de Convivencia',
+            'page_slug'     => 'manual-de-convivencia',
+            'page_content'  => '',
+            'page_template' => 'page-manual-convivencia.php',
+        ),
+        array(
             'page_title'    => 'Simbolos Institucionales', 
             'page_slug'     => 'simbolos-institucionales',
             'page_content'  => '',

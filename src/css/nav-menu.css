@@ -39,6 +39,11 @@
    DESKTOP MENU - COLORES MEJORADOS
    ======================================== */
 
+header .header-navigation {
+    position: relative;
+    z-index: 20;
+}
+
 /* Evitar que elementos de 2 palabras ("La Institución") se partan en dos líneas */
 .header-group > a {
     white-space: nowrap;
@@ -53,6 +58,24 @@ header .search-form .search-field {
     max-width: 175px;
 }
 
+.header-topbar-search .search-form {
+    width: 13.75rem;
+}
+
+.header-topbar-search .search-field {
+    max-width: 175px;
+}
+
+@media (max-width: 640px) {
+    .header-topbar-search .search-form {
+        width: 9rem;
+    }
+
+    .header-topbar-search .search-field {
+        max-width: 95px;
+    }
+}
+
 /* Sin imagen - modo claro */
 .no-header-image .header-group a {
     position: relative;
@@ -62,6 +85,47 @@ header .search-form .search-field {
 .header-navigation .header-group > a {
     padding-right: 0.375rem;
     padding-left: 0.375rem;
+}
+
+@media (min-width: 1024px) {
+    .header-navigation + .header-administrative-actions {
+        margin-left: 0.5rem;
+    }
+}
+
+.header-administrative-menu {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 50;
+}
+
+.header-administrative-menu > summary {
+    min-height: 36px;
+    line-height: 1.25rem;
+    white-space: nowrap;
+}
+
+.has-header-image .header-administrative-menu > summary {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-administrative-menu > summary::-webkit-details-marker {
+    display: none;
+}
+
+.header-administrative-menu .submenu {
+    left: auto;
+    right: 0;
+    top: calc(100% + 0.5rem);
+}
+
+.header-administrative-menu[open] .submenu {
+    display: block !important;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
 }
 
 .no-header-image .header-group:hover .underline-link::after {
