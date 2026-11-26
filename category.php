@@ -224,20 +224,20 @@ $is_circular_category = isset($current_category->slug) && $current_category->slu
         </div>
 
         <!-- 🔹 Paginación -->
-        <div class="mt-8 flex justify-center">
-            <?php
-            if ($convocatorias->max_num_pages > 1) {
+        <?php if ($convocatorias->max_num_pages > 1) : ?>
+            <nav class="category-pagination mt-8 flex justify-center" aria-label="<?php esc_attr_e('Paginación de publicaciones', 'edusiteco'); ?>">
+                <?php
                 echo paginate_links([
                     'total' => $convocatorias->max_num_pages,
                     'current' => $current_page,
                     'mid_size' => 2,
-                    'prev_text' => __('« Anterior'),
-                    'next_text' => __('Siguiente »'),
+                    'prev_text' => __('« Anterior', 'edusiteco'),
+                    'next_text' => __('Siguiente »', 'edusiteco'),
                     'type' => 'list',
                 ]);
-            }
-            ?>
-        </div>
+                ?>
+            </nav>
+        <?php endif; ?>
         </div>
     </div>
 </main>
